@@ -3,6 +3,8 @@ import Uploader from './Uploader';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 const style = {
 	margin:12,
@@ -15,6 +17,7 @@ export default class AddShop extends Component {
 		this.uploadSuccess = this.uploadSuccess.bind(this);
 		this.add = this.add.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.typeChange = this.typeChange.bind(this);
 
 		this.state = {
 			pic : "",
@@ -22,9 +25,17 @@ export default class AddShop extends Component {
 			phone: "",
 			address: "",
 			desc: "",
+			typeData:[],
+			typeId:"",
 			open:false,
 		};
-	}
+
+		fetch("/getAllTypes")
+		.then(resp => resp.json())
+		.then(result => {
+			this.setState({typeData:result})
+		});
+	};
 
 	handleChange(event){
 	   switch(event.target.id) {
@@ -33,6 +44,10 @@ export default class AddShop extends Component {
 			case "address" : this.setState({address:event.target.value});break;
 	   		case "desc" : this.setState({desc:event.target.value});break;
 	   }
+	};
+
+	typeChange(event, index, value) {
+		this.setState({typeId:value});
 	}
 
 	uploadSuccess(name) {
@@ -40,7 +55,7 @@ export default class AddShop extends Component {
 		this.setState({
 			pic:name
 		});
-	}
+	};
 
 
 	add() {
@@ -50,6 +65,7 @@ export default class AddShop extends Component {
 		data.append("address",this.state.address);
 		data.append("desc",this.state.desc);
 		data.append("pic",this.state.pic);
+		data.append("typeId",this.state.typeId);
 		console.log(data);
 		fetch("/console/addShop",
 			{
@@ -61,9 +77,18 @@ export default class AddShop extends Component {
 			this.setState({open:true})
 			console.log(result);
 		});		
-	}
+	};
+
+	componentDidMount() {
+
+	};
 
 	render() {
+
+		const typeList = this.state.typeData.map((type) => 
+			<MenuItem value={type.Id} primaryText={type.Name} />
+		);
+
 		return (
 			<div>
 				<TextField hintText="名称" floatingLabelText="名称" id="name" onChange={this.handleChange}/>
@@ -71,6 +96,15 @@ export default class AddShop extends Component {
 				<TextField hintText="地址" floatingLabelText="地址" id="address" onChange={this.handleChange}/>
 				<TextField hintText="描述" floatingLabelText="描述" id="desc" onChange={this.handleChange}/>
 				<Uploader id={1} success={this.uploadSuccess} />
+
+				<SelectField
+		          floatingLabelText="类型"
+		          value={this.state.typeId}
+		          onChange={this.typeChange}
+		        >
+		          {typeList}
+		        </SelectField>
+
 				<RaisedButton label="添加" primary={true} style={style} onClick={this.add} />
 				<Snackbar
 		          open={this.state.open}
@@ -79,5 +113,7 @@ export default class AddShop extends Component {
 		        />
 			</div>
 		)
-	}
+	};
+
+
 }
