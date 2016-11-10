@@ -19,10 +19,11 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
-import { Router,Route,browserHistory } from 'react-router';
+import { Router,Route,browserHistory,Link } from 'react-router';
 
 import AddShop from './AddShop';
 import AddType from './AddType';
+import ShopList from './ShopList';
 
 const style = {
   height: 100,
@@ -50,6 +51,7 @@ class Main extends Component {
           <Route path="/admin" component={App} >
             <Route path="addShop" component={AddShop} />
             <Route path="addType" component={AddType} />
+            <Route path="shopList" component={ShopList} />
           </Route>
         </Router>
       </MuiThemeProvider>
@@ -85,9 +87,9 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <MenuItem primaryText="Refresh" />
-    <MenuItem primaryText="Help" />
-    <MenuItem primaryText="Sign out" />
+    <Link to="/admin/addType"><MenuItem primaryText="添加类型" /></Link>
+    <Link to="/admin/addShop"><MenuItem primaryText="添加商铺" /></Link>
+    <Link to="/admin/shopList"><MenuItem primaryText="商品列表" /></Link>
   </IconMenu>
 );
 
