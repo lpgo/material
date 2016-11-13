@@ -24,6 +24,7 @@ import { Router,Route,browserHistory,Link } from 'react-router';
 import AddShop from './AddShop';
 import AddType from './AddType';
 import ShopList from './ShopList';
+import ShopDetail from './ShopDetail';
 
 const style = {
   height: 100,
@@ -52,6 +53,7 @@ class Main extends Component {
             <Route path="addShop" component={AddShop} />
             <Route path="addType" component={AddType} />
             <Route path="shopList" component={ShopList} />
+            <Route path="shop/:id" component={ShopDetail} />
           </Route>
         </Router>
       </MuiThemeProvider>
