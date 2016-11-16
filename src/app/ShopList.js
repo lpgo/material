@@ -7,13 +7,13 @@ export default class ShopLIst extends React.Component {
 		super(props);
 
 		this.state = {data:[{Id:123,Name:"aaa",Phone:"1234123",Address:"fugu",Desc:"hao"}]};
-		/*
+		
 		fetch("/getAllShops")
 		.then(resp => resp.json())
 		.then(result => {
 			this.setState({data:result})
 		});
-		*/
+		
 	}
 
 	render() {
