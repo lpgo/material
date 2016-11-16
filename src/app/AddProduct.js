@@ -12,7 +12,8 @@ export default class AddProduct extends React.Component {
 			images:[],
 			name:"",
 			price:0.0,
-			desc:""
+			desc:"",
+			open: false,
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -66,7 +67,7 @@ export default class AddProduct extends React.Component {
 					);
 				})}
 				<Uploader id={1} success={this.uploadSuccess} />
-				<RaisedButton label="添加" primary={true} style={style} onClick={this.add} />
+				<RaisedButton label="添加" primary={true}  onClick={this.add} />
 				<Snackbar
 		          open={this.state.open}
 		          message="添加成功"

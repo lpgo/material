@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import ProductItem from './ProductItem';
+import AddProduct from './AddProduct';
 import RaisedButton from 'material-ui/RaisedButton';
 
 export default class ShopDetail extends React.Component {
@@ -9,8 +10,11 @@ export default class ShopDetail extends React.Component {
 		super(props);
 		this.state = {
 			shop:{Products:[]},
-			addState:false;
+			addState:false,
 		};
+
+		this.setAddState = this.setAddState.bind(this);
+		this.addDone = this.addDone(this);
 	}
 
 	componentDidMount() {
@@ -30,6 +34,14 @@ export default class ShopDetail extends React.Component {
 		}});
 	}
 
+	setAddState() {
+		this.setState({addState:true});
+	}
+
+	addDone() {
+
+	}
+
 	render() {
 		return (
 			<div>
@@ -46,7 +58,7 @@ export default class ShopDetail extends React.Component {
 				{this.state.addState ? (
 					<AddProduct shopId={this.state.shop.Id} done={this.addDone}/>
 				) : (
-					<RaisedButton label="添加商品" primary={true} onClick={this.add} />
+					<RaisedButton label="添加商品" primary={true} onClick={this.setAddState} />
 				)} 
 			</div>
 		);
