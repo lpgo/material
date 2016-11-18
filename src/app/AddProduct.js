@@ -24,15 +24,15 @@ export default class AddProduct extends React.Component {
 	handleChange(event){
 	   switch(event.target.id) {
 	   		case "name" : this.setState({name:event.target.value});break;
-	   		case "price" : this.setState({price:event.target.value.parseFloat()});break;
+	   		case "price" : this.setState({price:event.target.value});break;
 	   		case "desc" : this.setState({desc:event.target.value});break;
 	   }
 	};
 
 	uploadSuccess(name) {
-		this.setState((prevState, props) => ({
-			images:prevState.images.push(name)
-		}));
+		console.log("upload sucess  "+name);
+		this.setState({images:[...this.state.images,name]});
+		console.log(this.state.images);
 	}
 
 	add() {
@@ -41,8 +41,9 @@ export default class AddProduct extends React.Component {
 		data.append("price",this.state.price);
 		data.append("desc",this.state.desc);
 		data.append("shopId",this.props.shopId);
-		data.append("images",this.state.images);
-		console.log(data);
+		for (var i = 0; i < this.state.images.length; i++) {
+			data.append("images",this.state.images[i]);	
+		}
 		fetch("/console/addProduct",
 			{
 				method: "POST",
