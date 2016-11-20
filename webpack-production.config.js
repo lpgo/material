@@ -11,7 +11,8 @@ const config = {
   // output config
   output: {
     path: buildPath, // Path of output file
-    filename: 'app.js', // Name of output file
+    filename: '/public/admin/app.js', // Name of output file
+    chunkFilename: '/public/admin/[name].js'
   },
   plugins: [
     // Define production build to allow React to strip out unnecessary checks

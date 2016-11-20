@@ -22,6 +22,7 @@ export default class ProductItem extends React.Component {
 			    })}
 			    
 			    <CardText>
+			    	<p>价格：{this.props.product.Price}</p>
 			      {this.props.product.Desc}
 			    </CardText>
 			  </Card>

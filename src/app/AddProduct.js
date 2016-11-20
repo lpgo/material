@@ -30,9 +30,7 @@ export default class AddProduct extends React.Component {
 	};
 
 	uploadSuccess(name) {
-		console.log("upload sucess  "+name);
 		this.setState({images:[...this.state.images,name]});
-		console.log(this.state.images);
 	}
 
 	add() {
@@ -52,7 +50,7 @@ export default class AddProduct extends React.Component {
 		).then(resp => resp.json())
 		.then(result => {
 			this.setState({open:true})
-			console.log(result);
+			this.props.done({Name:this.state.name,Price:this.state.price,Desc:this.state.desc,Images:this.state.images});
 		});		
 	}
 

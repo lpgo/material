@@ -2,11 +2,11 @@ import React,{Component} from 'react';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import {Link} from 'react-router';
 
-export default class ShopLIst extends React.Component {
+export default class ShopList extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {data:[{Id:123,Name:"aaa",Phone:"1234123",Address:"fugu",Desc:"hao"}]};
+		this.state = {data:[]};
 		
 		fetch("/getAllShops")
 		.then(resp => resp.json())

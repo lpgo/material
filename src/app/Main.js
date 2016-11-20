@@ -3,15 +3,10 @@
  * which incorporates components provided by Material-UI.
  */
 import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import Dialog from 'material-ui/Dialog';
 import {deepOrange500} from 'material-ui/styles/colors';
-import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -20,11 +15,6 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import { Router,Route,browserHistory,Link } from 'react-router';
-
-import AddShop from './AddShop';
-import AddType from './AddType';
-import ShopList from './ShopList';
-import ShopDetail from './ShopDetail';
 
 const style = {
   height: 100,
@@ -50,10 +40,26 @@ class Main extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <Router history={browserHistory}>
           <Route path="/admin" component={App} >
-            <Route path="addShop" component={AddShop} />
-            <Route path="addType" component={AddType} />
-            <Route path="shopList" component={ShopList} />
-            <Route path="shop/:id" component={ShopDetail} />
+            <Route path="addShop" getComponent={(nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('./AddShop').default)
+              },'AddShop')
+            }}  />
+            <Route path="addType" getComponent={(nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('./AddType').default)
+              },'AddType')
+            }}   />
+            <Route path="shopList" getComponent={(nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('./ShopList').default)
+              },'ShopList')
+            }} />
+            <Route path="shop/:id" getComponent={(nextState, cb) => {
+              require.ensure([], (require) => {
+                cb(null, require('./ShopDetail').default)
+              },'ShopDetail')
+            }}   />
           </Route>
         </Router>
       </MuiThemeProvider>
