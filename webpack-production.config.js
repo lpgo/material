@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const buildPath = path.resolve(__dirname, 'build');
+const buildPath = path.resolve(__dirname, 'build/admin');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
@@ -28,6 +28,7 @@ const config = {
         warnings: false,
       },
     }),
+
     // Allows error warnings but does not stop compiling.
     //new webpack.NoErrorsPlugin(),
     // Transfer Files
