@@ -1,12 +1,17 @@
 .container{
-	
+	font-size: 0;
 }
 
-.item button {
+h2 {
+	display: block;
+}
+
+.item a {
 	border: 2px solid #000;
 	padding: 8px 36px;
 	background-color: #fff;
 	margin-bottom: 40px;
+	display: inline-block;
 }
 
 .imgBox {
@@ -19,8 +24,10 @@
 
 .item {
 	text-align: center;
+	font-size: 16px;
 }
 .smallItem {
-	width: 50%;
+	
 	display: inline-block;
+	width: 50%;
 }
